@@ -40,6 +40,7 @@ var Model = [
 //define globals to be available to ViewModel and initMap
 var markers = [];
 var map;
+var infoWindow;
 
 //initalize google map function
 var initMap= function() {
@@ -61,19 +62,21 @@ var initMap= function() {
     map.setCenter(currCenter);
   });
   
-  //create markers and infowindows for each entry in model
+  //instantiate infoWindow
+  infoWindow = new google.maps.InfoWindow({
+  });
+  
+  //create markers for each entry in model
   for (var i = 0; i < Model.length; i++) {
-    var infoWindow = new google.maps.InfoWindow({
-      content: Model[i].name
-    });
-    Model[i].info_window = infoWindow;
+    
     var marker = new google.maps.Marker({
       position: Model[i],
       map: map,
       title: Model[i].name
     });
+
     //for each marker add listener with closure
-    marker.addListener('click', (function(markerCopy, infoWindowCopy, i) {
+    marker.addListener('click', (function(markerCopy, i) {
       var i = i;
       return function() {
         //animate on click for limited amount of time
@@ -85,8 +88,9 @@ var initMap= function() {
           markerCopy.setAnimation(null);
           }, 2000);
         }
-        //open info window for given marker
-        infoWindowCopy.open(map, markerCopy);
+        //open info window for given marker and set content
+        infoWindow.open(map, markerCopy);
+        infoWindow.setContent(markerCopy.title);
 
         //get external data from APIs using asynchronous protocols, add to secondary presentation panel
         $.getJSON("http://api.wunderground.com/api/9a6cc052e17075c8/conditions/q/VT/" + Model[i].location + ".json", function(data) {
@@ -111,7 +115,8 @@ var initMap= function() {
           $("#wiki-info").html("<p style='color: red; background-color: white; text-align: center;'>**Cannot access Wikipedia resources**</p>");
         }); 
       };
-    })(marker, infoWindow, i));
+    })(marker, i));
+
     markers.push(marker);
     Model[i].marker = marker;
   };
@@ -128,7 +133,8 @@ var viewModel = function() {
   
   //handler for list view, animates map and gets asynchronous data for presentation panel
   self.logger = function(obj) {
-    obj.info_window.open(map, obj.marker);
+    infoWindow.open(map, obj.marker);
+    infoWindow.setContent(obj.marker.title);
     obj.marker.setAnimation(google.maps.Animation.BOUNCE);
       setTimeout(function() {
         obj.marker.setAnimation(null);
