@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+  	<title>FEND_P5.1</title>
+  	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+      <div class="container">
+        <header class="row">
+          <div class="col-sm-3"><img class="img-responsive center-block" src="images/peaks3.png" alt="mountain peaks outline"></div>
+          <div class="col-sm-6"><h2 id="title">Ski the <span id="green">Green</span> Mountains</h2><hr></div>
+          <div class="col-sm-3"></div>  
+        </header>
+        <section class="row">
+          <div class="col-sm-5">
+            <h4>Ski Areas</h4>
+            <ol data-bind="foreach: $root.filteredLocations">
+              <li><a href="#" id="list-element" data-bind="text: $data.name, click: $root.logger"></a></li>
+            </ol>
+          </div>
+          <div class="col-sm-7">
+            <input id="search-field" data-bind="textInput: searchTerm"> <em>Search For Ski Areas by Name</em></input>
+            <p id="instruction">-Click on map markers or resort names for more information-</p>
+          </div>
+        </section>
+        <section class="row" id = "area-info">
+          <div class="col-md-4" id="resort-info"><hr>
+            <h5>SKI AREA INFORMATION</h5>
+            <div id="location-information"></div>
+            <div id="wiki-info"></div><hr>
+            <div id="acknowledgement"></div>
+          </div>
+          <div class="col-md-8" id="map">
+          </div>
+        </section>
+    </div>
+      <script src="js/jquery.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+      <script src="js/lib/knockout-3.4.0.js"></script>
+  	  <script src="js/app.js"></script>
+  	  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoCOX2O2u_l3xoCYXUbdPwfLeFyclctxc&callback=initMap"></script>
+  </body>
+</html>

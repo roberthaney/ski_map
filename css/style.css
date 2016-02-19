@@ -1,0 +1,54 @@
+header {
+	background-color: #e0e0eb;
+}
+
+#title {
+	text-transform: uppercase;
+	color: white;
+	text-shadow: 1px 1px 2px #000000, 0 0 20px #0000ff, 0 0 10px #000033;
+	text-align: center;
+	background-color: #e0e0eb;
+}
+
+#green {
+	color: #4b9900;
+}
+
+#search-field {
+	margin-left: 20px;
+	margin-top: 30px;
+}
+
+#instruction {
+	padding-top: 35px;
+	color: #a14545 ;
+}
+
+#resort-info {
+	background-color: #e0e0eb;
+  	padding-bottom: 10px;
+}
+
+#map {
+	min-height: 600px;
+	height: 100%;
+}
+
+#list-element {
+	font-family: Oldtown, fantasy;
+}
+
+#area-info {
+	background-color: #e0e0eb;
+}
+
+#wunderimage {
+	min-width: 90px;
+	max-width: 120px;
+}
+
+#acknowledgement {
+	text-align: center;
+}
+
+
