@@ -133,32 +133,7 @@ var viewModel = function() {
   
   //handler for list view, animates map and gets asynchronous data for presentation panel
   self.logger = function(obj) {
-    infoWindow.open(map, obj.marker);
-    infoWindow.setContent(obj.marker.title);
-    obj.marker.setAnimation(google.maps.Animation.BOUNCE);
-      setTimeout(function() {
-        obj.marker.setAnimation(null);
-      }, 2000); 
-    $.getJSON("http://api.wunderground.com/api/9a6cc052e17075c8/conditions/q/VT/" + obj.location + ".json", function(data) {
-        var location_header = "<div id='location-header'><h4>" + obj.name + "</h4>";
-        var temperature_display = "<h5>Temperature: " + data.current_observation.temp_f + " F</h5>";
-        var weather_display = "<h5>Current Weather: " + data.current_observation.weather + "</h5>";
-        var wind_display = "<h5>Wind: " + data.current_observation.wind_mph + " MPH</h5>";
-        var acknowledgement = "<div><p>Current conditions courtesy of: </p><span><img class='img-responsive center-block' id='wunderimage' src=images/wundergroundLogo_4c_horz.png></span></div>";
-        $("#acknowledgement").html(acknowledgement);
-        $("#location-information").html(location_header + temperature_display + weather_display + wind_display);
-    }).error(function(e) {
-      $("#location-information").html("<p style='color: red; background-color: white; text-align: center;'>**Cannot load weather conditions**</p>");
-    });
-    $.ajax({
-      url: "http://en.wikipedia.org/w/api.php?action=opensearch&search=" + obj.wikipedia + "&format=json&callback=wikiCallback",
-      dataType: "jsonp",
-      success: function(response) {
-        $("#wiki-info").html("<p><em>" + response[1] + "</em>: " + response[2] + "<a href='" + response[3] +"'> Wikipedia link.</a>" + "</p>");
-      }
-    }).fail(function() {
-      $("#wiki-info").html("<p style='color: red; background-color: white; text-align: center;'>**Cannot access Wikipedia resources**</p>");
-    });
+    google.maps.event.trigger(obj.marker, 'click');
   };
 
   //filter markers on search term function
