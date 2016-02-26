@@ -15,18 +15,24 @@ header {
 }
 
 #search-field {
-	margin-left: 20px;
-	margin-top: 30px;
+	width: 70%;
 }
 
 #instruction {
 	padding-top: 35px;
+	padding-left: 20px;
+	text-align: left;
 	color: #a14545 ;
 }
 
 #resort-info {
 	background-color: #e0e0eb;
   	padding-bottom: 10px;
+}
+
+.form-group {
+	padding-top: 10px;
+	padding-left: 20px;
 }
 
 #map {
@@ -51,4 +57,8 @@ header {
 	text-align: center;
 }
 
-
+@media only screen and (max-width: 500px) {
+	#instruction {
+		padding-top: 0px;
+	}
+}

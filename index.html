@@ -22,7 +22,12 @@
             </ol>
           </div>
           <div class="col-sm-7">
-            <input id="search-field" data-bind="textInput: searchTerm"> <em>Search For Ski Areas by Name</em></input>
+            <form class="form">
+              <div class="form-group">
+                <label for="search-field"><em>Search For Ski Areas by Name</em></label>
+                <input type="text" id="search-field" data-bind="textInput: searchTerm" placeholder="Ski Area Name"> 
+              </div>
+            </form>
             <p id="instruction">-Click on map markers or resort names for more information-</p>
           </div>
         </section>
